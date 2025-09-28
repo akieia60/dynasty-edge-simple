@@ -1506,75 +1506,13 @@
             
             <!-- Live Games Tab -->
             <div id="live-games" class="tab-content active">
-                <div class="games-grid">
-                    <div class="game-card" data-game="IND-PIT">
-                        <div class="game-header">
-                            <div>
-                                <div class="teams">Indianapolis Colts @ Pittsburgh Steelers</div>
-                                <div class="weather-info">
-                                    🌤️ 68°F, 8mph wind, Clear
-                                </div>
-                            </div>
-                            <div class="game-status status-live">LIVE</div>
+                <div id="game-cards-container">
+                    <!-- Game selector will be populated here by game-selector.js -->
+                    <div class="text-center p-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading games...</span>
                         </div>
-                        <div class="game-data">
-                            <div class="data-item">
-                                <div class="data-label">Spread</div>
-                                <div class="data-value">-3.5</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Total</div>
-                                <div class="data-value">42.5</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Movement</div>
-                                <div class="data-value movement-up">+1.0</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Value</div>
-                                <div class="data-value value-high">11.3%</div>
-                            </div>
-                        </div>
-                        <div class="game-actions">
-                            <button class="analyze-btn" onclick="analyzeGame('IND-PIT')">🎯 Analyze</button>
-                            <button class="parlay-btn" onclick="addToParlay('IND-PIT', 'Steelers -3.5')">➕ Add to Parlay</button>
-                            <button class="twitter-btn" onclick="shareToTwitter('IND-PIT')">🐦 Share Alert</button>
-                        </div>
-                    </div>
-                    
-                    <div class="game-card" data-game="PHI-TB">
-                        <div class="game-header">
-                            <div>
-                                <div class="teams">Philadelphia Eagles @ Tampa Bay Buccaneers</div>
-                                <div class="weather-info">
-                                    ☀️ 82°F, 12mph wind, Sunny
-                                </div>
-                            </div>
-                            <div class="game-status status-alert">ALERT</div>
-                        </div>
-                        <div class="game-data">
-                            <div class="data-item">
-                                <div class="data-label">Spread</div>
-                                <div class="data-value">-2.5</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Total</div>
-                                <div class="data-value">51.0</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Movement</div>
-                                <div class="data-value movement-up">+2.5</div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-label">Value</div>
-                                <div class="data-value value-high">14.7%</div>
-                            </div>
-                        </div>
-                        <div class="game-actions">
-                            <button class="analyze-btn" onclick="analyzeGame('PHI-TB')">🎯 Analyze</button>
-                            <button class="parlay-btn" onclick="addToParlay('PHI-TB', 'Eagles -2.5')">➕ Add to Parlay</button>
-                            <button class="twitter-btn" onclick="shareToTwitter('PHI-TB')">🐦 Share Alert</button>
-                        </div>
+                        <p class="mt-3 text-muted">Loading all 16 Week 4 games...</p>
                     </div>
                 </div>
             </div>
@@ -2816,5 +2754,11 @@
             }
         }
     </script>
+    
+    <!-- Live Stripe Integration -->
+    <script src="stripe-integration-live.js"></script>
+    
+    <!-- Game Selector Component -->
+    <script src="game-selector.js"></script>
 </body>
 </html>
