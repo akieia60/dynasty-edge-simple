@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynasty Edge - AI Sports Betting Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #1e40af 50%, #1e293b 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200') center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .status-badges {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .badge.live {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .badge.win-rate {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+        
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #60a5fa;
+            margin-bottom: 1.5rem;
+        }
+        
+        .description {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value.green { color: #22c55e; }
+        .stat-value.blue { color: #60a5fa; }
+        
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        
+        .dashboard {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+        
+        .games-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .game-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            background: rgba(30, 41, 59, 1);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .teams {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .game-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-live {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        
+        .status-alert {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            animation: pulse 2s infinite;
+        }
+        
+        .game-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .data-item {
+            text-align: center;
+        }
+        
+        .data-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 0.25rem;
+        }
+        
+        .data-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .movement-up { color: #22c55e; }
+        .movement-down { color: #ef4444; }
+        .value-high { color: #eab308; }
+        
+        .analyze-btn {
+            background: #2563eb;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .analyze-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        .features {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 4rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .feature p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, #1e293b, #1e40af);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+        
+        .live-indicator {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.25rem; }
+            .container { padding: 0 1rem; }
+            .stats { grid-template-columns: 1fr; }
+            .buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="status-badges">
+                <div class="badge live">
+                    <div class="pulse"></div>
+                    LIVE MONITORING
+                </div>
+                <div class="badge win-rate">
+                    🏆 73.2% WIN RATE
+                </div>
+            </div>
+            
+            <h1>Dynasty Edge</h1>
+            <div class="subtitle">Betting Intelligence</div>
+            
+            <p class="description">
+                AI-powered sports betting analysis that finds profitable opportunities in real-time. 
+                Get instant alerts when the odds move in your favor.
+            </p>
+            
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="startAnalysis()">
+                    ▶️ Start Live Analysis
+                </button>
+                <a href="#dashboard" class="btn btn-secondary">
+                    📊 View Dashboard
+                </a>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="alerts-today">12</div>
+                    <div class="stat-label">Live Alerts Today</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value green" id="total-value">$15,420</div>
+                    <div class="stat-label">Total Value Found</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value blue" id="success-rate">73.2%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 class="section-title">Live Betting Intelligence</h2>
+            <p class="section-subtitle">
+                Real-time analysis of NFL games with instant alerts for profitable betting opportunities
+            </p>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="teams">Green Bay Packers @ Dallas Cowboys</div>
+                        <div class="game-status status-live">LIVE</div>
+                    </div>
+                    <div class="game-data">
+                        <div class="data-item">
+                            <div class="data-label">Spread</div>
+                            <div class="data-value">-6.5</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Total</div>
+                            <div class="data-value">46.0</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Movement</div>
+                            <div class="data-value movement-up">+1.5</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Value</div>
+                            <div class="data-value value-high">8.2%</div>
+                        </div>
+                        <div class="data-item">
+                            <button class="analyze-btn" onclick="analyzeGame('DAL-GB')">🎯 Analyze</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="teams">Buffalo Bills @ Kansas City Chiefs</div>
+                        <div class="game-status status-live">LIVE</div>
+                    </div>
+                    <div class="game-data">
+                        <div class="data-item">
+                            <div class="data-label">Spread</div>
+                            <div class="data-value">-3.0</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Total</div>
+                            <div class="data-value">52.5</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Movement</div>
+                            <div class="data-value movement-down">-0.5</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Value</div>
+                            <div class="data-value value-high">5.7%</div>
+                        </div>
+                        <div class="data-item">
+                            <button class="analyze-btn" onclick="analyzeGame('BUF-KC')">🎯 Analyze</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="teams">Seattle Seahawks @ San Francisco 49ers</div>
+                        <div class="game-status status-alert">ALERT</div>
+                    </div>
+                    <div class="game-data">
+                        <div class="data-item">
+                            <div class="data-label">Spread</div>
+                            <div class="data-value">-4.5</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Total</div>
+                            <div class="data-value">44.0</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Movement</div>
+                            <div class="data-value movement-up">+2.0</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-label">Value</div>
+                            <div class="data-value value-high">12.1%</div>
+                        </div>
+                        <div class="data-item">
+                            <button class="analyze-btn" onclick="analyzeGame('SEA-SF')">🎯 Analyze</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🚨</div>
+                    <h3>Real-Time Alerts</h3>
+                    <p>Get instant notifications when profitable betting opportunities arise</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Advanced Analytics</h3>
+                    <p>AI-powered analysis of betting lines, movements, and expected value</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Proven Results</h3>
+                    <p>73.2% win rate with consistent profitable recommendations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Winning?</h2>
+            <p>Join thousands of successful bettors using Dynasty Edge to find profitable opportunities</p>
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="getStarted()">Get Started Free</button>
+                <button class="btn btn-secondary" onclick="watchDemo()">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Indicator -->
+    <div class="live-indicator">
+        <div class="pulse"></div>
+        Live data updates every 30 seconds
+    </div>
+
+    <script>
+        // Simulate live data updates
+        function updateStats() {
+            const alertsEl = document.getElementById('alerts-today');
+            const valueEl = document.getElementById('total-value');
+            const rateEl = document.getElementById('success-rate');
+            
+            // Simulate small changes
+            const currentAlerts = parseInt(alertsEl.textContent);
+            const currentValue = parseInt(valueEl.textContent.replace(/[$,]/g, ''));
+            const currentRate = parseFloat(rateEl.textContent);
+            
+            // Random small updates
+            if (Math.random() > 0.7) {
+                alertsEl.textContent = currentAlerts + Math.floor(Math.random() * 3);
+            }
+            
+            if (Math.random() > 0.8) {
+                const newValue = currentValue + Math.floor(Math.random() * 200 - 100);
+                valueEl.textContent = '$' + newValue.toLocaleString();
+            }
+            
+            if (Math.random() > 0.9) {
+                const newRate = currentRate + (Math.random() - 0.5) * 0.5;
+                rateEl.textContent = newRate.toFixed(1) + '%';
+            }
+        }
+        
+        // Interactive functions
+        function startAnalysis() {
+            alert('🚀 Live analysis started! Your Dynasty Edge bot is now monitoring NFL games for profitable betting opportunities.');
+        }
+        
+        function analyzeGame(gameId) {
+            alert(`🎯 Analyzing ${gameId}... \n\n✅ Line movement detected\n📊 Expected value calculated\n🚨 Alert will be posted if profitable!`);
+        }
+        
+        function getStarted() {
+            alert('🎉 Welcome to Dynasty Edge! \n\nYour account is being set up with:\n• Real-time NFL monitoring\n• Twitter alert integration\n• Advanced analytics dashboard');
+        }
+        
+        function watchDemo() {
+            alert('📺 Demo: Dynasty Edge finds profitable bets by:\n\n1. Monitoring live NFL odds\n2. Detecting significant line movements\n3. Calculating expected value\n4. Posting alerts when EV > 2%');
+        }
+        
+        // Start live updates
+        setInterval(updateStats, 5000);
+        
+        // Add some interactive hover effects
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
