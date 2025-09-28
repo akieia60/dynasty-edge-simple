@@ -720,6 +720,370 @@
             z-index: 1000;
         }
         
+        /* Parlay Builder Styles */
+        .parlay-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .parlay-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .available-bets {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        
+        .bet-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .bet-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(51, 65, 85, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .bet-item:hover {
+            background: rgba(51, 65, 85, 0.5);
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+        
+        .bet-info {
+            flex: 1;
+        }
+        
+        .bet-player {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+        
+        .bet-prop {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .bet-odds {
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .add-bet-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        
+        .add-bet-btn:hover {
+            background: #16a34a;
+            transform: scale(1.1);
+        }
+        
+        .parlay-slip {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .parlay-bets {
+            min-height: 200px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .parlay-bet-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(51, 65, 85, 0.3);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+        
+        .parlay-bet-info {
+            flex: 1;
+        }
+        
+        .parlay-bet-name {
+            font-weight: 600;
+            color: white;
+            font-size: 0.875rem;
+        }
+        
+        .parlay-bet-odds {
+            color: #7c3aed;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        
+        .remove-bet-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        
+        .parlay-calculator {
+            border-top: 1px solid rgba(51, 65, 85, 0.5);
+            padding-top: 1.5rem;
+        }
+        
+        .bet-amount {
+            margin-bottom: 1rem;
+        }
+        
+        .payout-display {
+            background: rgba(51, 65, 85, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .payout-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+        
+        .payout-row.profit {
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border-top: 1px solid rgba(51, 65, 85, 0.5);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .place-parlay-btn, .clear-parlay-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .place-parlay-btn {
+            background: #7c3aed;
+            color: white;
+        }
+        
+        .place-parlay-btn:disabled {
+            background: rgba(51, 65, 85, 0.5);
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+        
+        .place-parlay-btn:not(:disabled):hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+        }
+        
+        .clear-parlay-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .clear-parlay-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Twitter Styles */
+        .twitter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .twitter-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .twitter-feed {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        
+        .tweet-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .tweet-item {
+            background: rgba(51, 65, 85, 0.3);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(29, 161, 242, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .tweet-item:hover {
+            background: rgba(51, 65, 85, 0.5);
+            border-color: rgba(29, 161, 242, 0.4);
+        }
+        
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .tweet-avatar {
+            width: 40px;
+            height: 40px;
+            background: #1da1f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .tweet-info {
+            flex: 1;
+        }
+        
+        .tweet-name {
+            font-weight: 600;
+            color: white;
+            font-size: 0.875rem;
+        }
+        
+        .tweet-handle {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+        
+        .tweet-time {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+        
+        .tweet-content {
+            color: #e2e8f0;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+        
+        .tweet-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .tweet-actions button {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tweet-actions button:hover {
+            background: rgba(29, 161, 242, 0.2);
+            color: #1da1f2;
+        }
+        
+        .twitter-actions {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            height: fit-content;
+        }
+        
+        .action-card {
+            background: rgba(51, 65, 85, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        
+        .action-title {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .action-desc {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .action-btn {
+            width: 100%;
+            padding: 0.5rem;
+            background: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: #1991db;
+            transform: translateY(-1px);
+        }
+        
+        .twitter-stats {
+            background: rgba(51, 65, 85, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .subtitle { font-size: 1.25rem; }
@@ -730,6 +1094,8 @@
             .game-data { grid-template-columns: repeat(2, 1fr); }
             .player-cards { grid-template-columns: 1fr; }
             .value-table { font-size: 0.875rem; }
+            .parlay-grid { grid-template-columns: 1fr; }
+            .twitter-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -988,16 +1354,228 @@
                 </div>
             </div>
             
-            <!-- Other tabs content remains the same -->
+            <!-- Parlay Builder Tab -->
             <div id="parlay-builder" class="tab-content">
-                <div style="text-align: center; padding: 3rem; color: #94a3b8;">
-                    Parlay Builder - Coming Soon
+                <div class="parlay-container">
+                    <div class="parlay-header">
+                        <h3 style="color: #60a5fa; margin-bottom: 1rem;">🎲 Dynasty Edge Parlay Builder</h3>
+                        <p style="color: #94a3b8; margin-bottom: 2rem;">Build your perfect parlay with AI-powered selections</p>
+                    </div>
+                    
+                    <div class="parlay-grid">
+                        <!-- Available Bets -->
+                        <div class="available-bets">
+                            <h4 style="color: #22c55e; margin-bottom: 1rem;">📊 Available Bets</h4>
+                            <div class="bet-list">
+                                <div class="bet-item" data-bet="taylor-rushing" data-odds="-110" data-selection="Jonathan Taylor O75.5 Rush Yards">
+                                    <div class="bet-info">
+                                        <div class="bet-player">Jonathan Taylor</div>
+                                        <div class="bet-prop">O75.5 Rush Yards</div>
+                                        <div class="bet-odds">-110</div>
+                                    </div>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('taylor-rushing', 'Jonathan Taylor O75.5 Rush Yards', -110)">➕</button>
+                                </div>
+                                
+                                <div class="bet-item" data-bet="chase-receiving" data-odds="-115" data-selection="Ja'Marr Chase O6.5 Receptions">
+                                    <div class="bet-info">
+                                        <div class="bet-player">Ja'Marr Chase</div>
+                                        <div class="bet-prop">O6.5 Receptions</div>
+                                        <div class="bet-odds">-115</div>
+                                    </div>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('chase-receiving', 'Ja\'Marr Chase O6.5 Receptions', -115)">➕</button>
+                                </div>
+                                
+                                <div class="bet-item" data-bet="barkley-rushing" data-odds="-105" data-selection="Saquon Barkley O85.5 Rush Yards">
+                                    <div class="bet-info">
+                                        <div class="bet-player">Saquon Barkley</div>
+                                        <div class="bet-prop">O85.5 Rush Yards</div>
+                                        <div class="bet-odds">-105</div>
+                                    </div>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('barkley-rushing', 'Saquon Barkley O85.5 Rush Yards', -105)">➕</button>
+                                </div>
+                                
+                                <div class="bet-item" data-bet="steelers-spread" data-odds="-110" data-selection="Steelers -3.5">
+                                    <div class="bet-info">
+                                        <div class="bet-player">Pittsburgh Steelers</div>
+                                        <div class="bet-prop">-3.5 Spread</div>
+                                        <div class="bet-odds">-110</div>
+                                    </div>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('steelers-spread', 'Steelers -3.5', -110)">➕</button>
+                                </div>
+                                
+                                <div class="bet-item" data-bet="eagles-total" data-odds="-110" data-selection="Eagles vs Bucs O51.0">
+                                    <div class="bet-info">
+                                        <div class="bet-player">PHI vs TB</div>
+                                        <div class="bet-prop">Over 51.0</div>
+                                        <div class="bet-odds">-110</div>
+                                    </div>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('eagles-total', 'Eagles vs Bucs O51.0', -110)">➕</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Parlay Slip -->
+                        <div class="parlay-slip">
+                            <h4 style="color: #7c3aed; margin-bottom: 1rem;">🎯 Your Parlay</h4>
+                            <div id="parlay-bets" class="parlay-bets">
+                                <div class="empty-parlay">
+                                    <div style="text-align: center; color: #94a3b8; padding: 2rem;">
+                                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎲</div>
+                                        <div>Add bets to build your parlay</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="parlay-calculator">
+                                <div class="bet-amount">
+                                    <label style="color: #94a3b8; display: block; margin-bottom: 0.5rem;">Bet Amount ($)</label>
+                                    <input type="number" id="bet-amount" value="10" min="1" max="1000" onchange="calculatePayout()" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid rgba(51, 65, 85, 0.5); background: rgba(30, 41, 59, 0.8); color: white;">
+                                </div>
+                                
+                                <div class="payout-display">
+                                    <div class="payout-row">
+                                        <span>Total Odds:</span>
+                                        <span id="total-odds">+0</span>
+                                    </div>
+                                    <div class="payout-row">
+                                        <span>Potential Payout:</span>
+                                        <span id="potential-payout">$0.00</span>
+                                    </div>
+                                    <div class="payout-row profit">
+                                        <span>Potential Profit:</span>
+                                        <span id="potential-profit">$0.00</span>
+                                    </div>
+                                </div>
+                                
+                                <button class="place-parlay-btn" onclick="placeParlay()" disabled>
+                                    🚀 Place Parlay
+                                </button>
+                                
+                                <button class="clear-parlay-btn" onclick="clearParlay()">
+                                    🗑️ Clear All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
+            <!-- Twitter Alerts Tab -->
             <div id="twitter-alerts" class="tab-content">
-                <div style="text-align: center; padding: 3rem; color: #94a3b8;">
-                    Twitter Alerts - Coming Soon
+                <div class="twitter-container">
+                    <div class="twitter-header">
+                        <h3 style="color: #1da1f2; margin-bottom: 1rem;">🐦 Dynasty Edge Twitter Alerts</h3>
+                        <p style="color: #94a3b8; margin-bottom: 2rem;">Live betting alerts and community insights</p>
+                    </div>
+                    
+                    <div class="twitter-grid">
+                        <!-- Twitter Feed -->
+                        <div class="twitter-feed">
+                            <h4 style="color: #1da1f2; margin-bottom: 1rem;">📢 Live Alerts</h4>
+                            <div class="tweet-list">
+                                <div class="tweet-item">
+                                    <div class="tweet-header">
+                                        <div class="tweet-avatar">🤖</div>
+                                        <div class="tweet-info">
+                                            <div class="tweet-name">Dynasty Edge Bot</div>
+                                            <div class="tweet-handle">@DynastyEdgeBot</div>
+                                            <div class="tweet-time">2m ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tweet-content">
+                                        🚨 ALERT: Jonathan Taylor O75.5 Rush Yards showing 11.3% value vs Steelers. Pittsburgh allowing 4.6 YPC, Taylor averaging 18.3 carries/game. Clear weather favors ground game. #NFLBetting #DynastyEdge
+                                    </div>
+                                    <div class="tweet-actions">
+                                        <button onclick="shareAlert('taylor-alert')">🔄 Retweet</button>
+                                        <button onclick="likeAlert('taylor-alert')">❤️ Like</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="tweet-item">
+                                    <div class="tweet-header">
+                                        <div class="tweet-avatar">🤖</div>
+                                        <div class="tweet-info">
+                                            <div class="tweet-name">Dynasty Edge Bot</div>
+                                            <div class="tweet-handle">@DynastyEdgeBot</div>
+                                            <div class="tweet-time">15m ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tweet-content">
+                                        📊 PARLAY ALERT: 3-leg parlay hitting 73% win rate this week:
+                                        • Saquon Barkley O85.5 Rush Yards
+                                        • Ja'Marr Chase O6.5 Receptions  
+                                        • Eagles vs Bucs O51.0
+                                        Total odds: +595 💰 #ParleyAlert
+                                    </div>
+                                    <div class="tweet-actions">
+                                        <button onclick="shareAlert('parlay-alert')">🔄 Retweet</button>
+                                        <button onclick="likeAlert('parlay-alert')">❤️ Like</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="tweet-item">
+                                    <div class="tweet-header">
+                                        <div class="tweet-avatar">🤖</div>
+                                        <div class="tweet-info">
+                                            <div class="tweet-name">Dynasty Edge Bot</div>
+                                            <div class="tweet-handle">@DynastyEdgeBot</div>
+                                            <div class="tweet-time">32m ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="tweet-content">
+                                        🌤️ WEATHER UPDATE: Clear conditions across all Week 4 games except SEA@SF (light rain expected). Wind under 10mph for all outdoor games. Perfect conditions for passing attacks. #WeatherEdge
+                                    </div>
+                                    <div class="tweet-actions">
+                                        <button onclick="shareAlert('weather-alert')">🔄 Retweet</button>
+                                        <button onclick="likeAlert('weather-alert')">❤️ Like</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Twitter Actions -->
+                        <div class="twitter-actions">
+                            <h4 style="color: #22c55e; margin-bottom: 1rem;">⚡ Quick Actions</h4>
+                            
+                            <div class="action-card">
+                                <div class="action-title">🔔 Follow for Alerts</div>
+                                <div class="action-desc">Get real-time betting alerts and analysis</div>
+                                <button class="action-btn" onclick="followDynastyEdge()">Follow @DynastyEdgeBot</button>
+                            </div>
+                            
+                            <div class="action-card">
+                                <div class="action-title">📢 Share Analysis</div>
+                                <div class="action-desc">Share your favorite picks with the community</div>
+                                <button class="action-btn" onclick="shareCustomAlert()">Create Custom Tweet</button>
+                            </div>
+                            
+                            <div class="action-card">
+                                <div class="action-title">🎯 Alert Settings</div>
+                                <div class="action-desc">Customize your notification preferences</div>
+                                <button class="action-btn" onclick="configureAlerts()">Configure Alerts</button>
+                            </div>
+                            
+                            <div class="twitter-stats">
+                                <h5 style="color: #1da1f2; margin-bottom: 1rem;">📊 Today's Performance</h5>
+                                <div class="stat-row">
+                                    <span>Alerts Sent:</span>
+                                    <span style="color: #22c55e;">18</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Win Rate:</span>
+                                    <span style="color: #22c55e;">73.2%</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Followers:</span>
+                                    <span style="color: #1da1f2;">2,847</span>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Engagement:</span>
+                                    <span style="color: #eab308;">94.3%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
