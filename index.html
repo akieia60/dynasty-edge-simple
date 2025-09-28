@@ -1373,7 +1373,7 @@
                                         <div class="bet-prop">O75.5 Rush Yards</div>
                                         <div class="bet-odds">-110</div>
                                     </div>
-                                    <button class="add-bet-btn" onclick="addBetToParlay('taylor-rushing', 'Jonathan Taylor O75.5 Rush Yards', -110)">➕</button>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('taylor-rushing', 'Jonathan Taylor', 'O75.5 Rush Yards', -110)">➕</button>
                                 </div>
                                 
                                 <div class="bet-item" data-bet="chase-receiving" data-odds="-115" data-selection="Ja'Marr Chase O6.5 Receptions">
@@ -1382,16 +1382,16 @@
                                         <div class="bet-prop">O6.5 Receptions</div>
                                         <div class="bet-odds">-115</div>
                                     </div>
-                                    <button class="add-bet-btn" onclick="addBetToParlay('chase-receiving', 'Ja\'Marr Chase O6.5 Receptions', -115)">➕</button>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('chase-receiving', 'Ja\'Marr Chase', 'O6.5 Receptions', -115)">➕</button>
                                 </div>
                                 
-                                <div class="bet-item" data-bet="barkley-rushing" data-odds="-105" data-selection="Saquon Barkley O85.5 Rush Yards">
+                                <div class="bet-item" data-bet="barkley-rushing" data-odds="+105" data-selection="Saquon Barkley O85.5 Rush Yards">
                                     <div class="bet-info">
                                         <div class="bet-player">Saquon Barkley</div>
                                         <div class="bet-prop">O85.5 Rush Yards</div>
-                                        <div class="bet-odds">-105</div>
+                                        <div class="bet-odds">+105</div>
                                     </div>
-                                    <button class="add-bet-btn" onclick="addBetToParlay('barkley-rushing', 'Saquon Barkley O85.5 Rush Yards', -105)">➕</button>
+                                    <button class="add-bet-btn" onclick="addBetToParlay('barkley-rushing', 'Saquon Barkley', 'O85.5 Rush Yards', 105)">➕</button>
                                 </div>
                                 
                                 <div class="bet-item" data-bet="steelers-spread" data-odds="-110" data-selection="Steelers -3.5">
@@ -1417,14 +1417,11 @@
                         <!-- Parlay Slip -->
                         <div class="parlay-slip">
                             <h4 style="color: #7c3aed; margin-bottom: 1rem;">🎯 Your Parlay</h4>
-                            <div id="parlay-bets" class="parlay-bets">
-                                <div class="empty-parlay">
-                                    <div style="text-align: center; color: #94a3b8; padding: 2rem;">
-                                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎲</div>
-                                        <div>Add bets to build your parlay</div>
-                                    </div>
-                                </div>
+                            <div style="text-align: center; padding: 2rem; color: #64748b;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">🎲</div>
+                                <div>Add bets to build your parlay</div>
                             </div>
+                        </div>
                             
                             <div class="parlay-calculator">
                                 <div class="bet-amount">
@@ -1813,6 +1810,114 @@
         // Other functions
         function startLiveAnalysis() {
             alert('🚀 Dynasty Edge Live Analysis Started!\n\n✅ Connected to NFL data feeds\n🌤️ Weather monitoring active\n🐦 Twitter alerts enabled\n📊 Real-time analysis running\n\nYour bot is now finding profitable opportunities!');
+        }
+        
+        // Parlay Builder Functions
+        let parlayBets = [];
+        
+        function addBetToParlay(betId, player, bet, odds) {
+            // Check if bet already exists
+            if (parlayBets.find(b => b.id === betId)) {
+                alert('This bet is already in your parlay!');
+                return;
+            }
+            
+            // Add bet to parlay
+            parlayBets.push({
+                id: betId,
+                player: player,
+                bet: bet,
+                odds: odds
+            });
+            
+            updateParlayDisplay();
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.innerHTML = `✅ Added ${player} to parlay!`;
+            successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #22c55e; color: white; padding: 1rem; border-radius: 0.5rem; z-index: 10000; font-weight: 600;';
+            document.body.appendChild(successMsg);
+            setTimeout(() => successMsg.remove(), 2000);
+        }
+        
+        function removeBetFromParlay(betId) {
+            parlayBets = parlayBets.filter(bet => bet.id !== betId);
+            updateParlayDisplay();
+        }
+        
+        function updateParlayDisplay() {
+            const parlayContainer = document.querySelector('.parlay-slip');
+            const betAmount = parseFloat(document.querySelector('input[type="range"]')?.value || 50);
+            
+            if (parlayBets.length === 0) {
+                parlayContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #64748b;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎲</div>
+                        <div>Add bets to build your parlay</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Calculate total odds
+            let totalOdds = 1;
+            parlayBets.forEach(bet => {
+                const decimal = bet.odds > 0 ? (bet.odds / 100) + 1 : (100 / Math.abs(bet.odds)) + 1;
+                totalOdds *= decimal;
+            });
+            
+            const americanOdds = totalOdds >= 2 ? `+${Math.round((totalOdds - 1) * 100)}` : `-${Math.round(100 / (totalOdds - 1))}`;
+            const payout = betAmount * totalOdds;
+            const profit = payout - betAmount;
+            
+            parlayContainer.innerHTML = `
+                <div style="margin-bottom: 1rem;">
+                    <div style="color: #22c55e; font-weight: 600; margin-bottom: 0.5rem;">${parlayBets.length}-Leg Parlay</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: white;">${americanOdds}</div>
+                </div>
+                
+                ${parlayBets.map(bet => `
+                    <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; color: white;">${bet.player}</div>
+                            <div style="font-size: 0.875rem; color: #94a3b8;">${bet.bet}</div>
+                            <div style="font-size: 0.875rem; color: #22c55e;">${bet.odds > 0 ? '+' : ''}${bet.odds}</div>
+                        </div>
+                        <button onclick="removeBetFromParlay('${bet.id}')" style="background: #ef4444; border: none; color: white; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 0.75rem;">×</button>
+                    </div>
+                `).join('')}
+                
+                <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; margin-top: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Bet Amount:</span>
+                        <span style="color: #22c55e; font-weight: 600;">$${betAmount}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Potential Payout:</span>
+                        <span style="color: #60a5fa; font-weight: 600;">$${payout.toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem;">
+                        <span>Profit:</span>
+                        <span style="color: #22c55e;">$${profit.toFixed(2)}</span>
+                    </div>
+                    
+                    <button onclick="placeParlayBet()" style="width: 100%; background: linear-gradient(135deg, #22c55e, #16a34a); border: none; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; margin-top: 1rem; cursor: pointer; font-size: 1rem;">
+                        Place Parlay Bet
+                    </button>
+                </div>
+            `;
+        }
+        
+        function placeParlayBet() {
+            if (parlayBets.length === 0) return;
+            
+            const betAmount = parseFloat(document.querySelector('input[type="range"]')?.value || 50);
+            alert(`🎯 Parlay Placed!\n\n${parlayBets.length}-Leg Parlay\nBet Amount: $${betAmount}\n\nBets:\n${parlayBets.map(bet => `• ${bet.player} ${bet.bet}`).join('\n')}\n\nGood luck! 🍀`);
+        }
+        
+        function clearParlay() {
+            parlayBets = [];
+            updateParlayDisplay();
         }
         
         function addToParlay(gameId, selection) {
